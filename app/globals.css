@@ -1,26 +1,177 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Base surfaces */
+  --color-void: #050505;
+  --color-void-deep: #0a0f0a;
+  --color-surface: #0d1410;
+  --color-surface-raised: #101a14;
+
+  /* Neon green accents */
+  --color-neon: #00ff88;
+  --color-neon-bright: #0aff6e;
+  --color-neon-dark: #00c853;
+  --color-neon-dim: #00c853;
+
+  /* Muted gray-green text */
+  --color-mist: #a8bdb0;
+  --color-mist-dim: #6f8577;
+  --color-mist-faint: #495750;
+
+  /* Rank metals — reserved for top 3 only */
+  --color-gold: #ffd700;
+  --color-gold-dim: #b8960a;
+  --color-silver: #c9d3d6;
+  --color-silver-dim: #8a959a;
+  --color-bronze: #cd7f32;
+  --color-bronze-dim: #8f5a23;
+
+  --font-display: var(--font-orbitron);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono-num);
+
+  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-pulse-slow: pulse-slow 2.4s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 2.5s ease-in-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }
 
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px 0 rgba(0, 255, 136, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 36px 4px rgba(0, 255, 136, 0.4);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-void);
+  color: var(--color-mist);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: rgba(0, 255, 136, 0.25);
+  color: #eafff2;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-neon-dark), var(--color-void-deep));
+  border-radius: 6px;
+  border: 2px solid var(--color-void);
+}
+
+/* Reusable utility classes */
+@layer components {
+  .glass {
+    background: rgba(10, 20, 15, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 255, 136, 0.14);
+  }
+
+  .glass-strong {
+    background: rgba(10, 20, 15, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+  }
+
+  .glow-text {
+    text-shadow:
+      0 0 10px rgba(0, 255, 136, 0.6),
+      0 0 30px rgba(0, 255, 136, 0.35),
+      0 0 60px rgba(0, 255, 136, 0.15);
+  }
+
+  .glow-border {
+    box-shadow:
+      0 0 0 1px rgba(0, 255, 136, 0.16),
+      0 0 24px 0 rgba(0, 255, 136, 0.12);
+  }
+
+  .gradient-text-neon {
+    background: linear-gradient(120deg, #0aff6e 0%, #00ff88 40%, #00c853 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-text-gold {
+    background: linear-gradient(120deg, #fff6ce 0%, #ffd700 45%, #b8960a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .font-tabular {
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-mono);
+  }
+
+  .shimmer-sweep {
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .bg-noise {
+    background-image: radial-gradient(
+      rgba(0, 255, 136, 0.06) 1px,
+      transparent 1px
+    );
+    background-size: 3px 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
