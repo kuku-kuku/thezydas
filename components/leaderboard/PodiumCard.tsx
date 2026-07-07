@@ -66,8 +66,8 @@ export default function PodiumCard({ user, place }: PodiumCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 160, scale: 0.85 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ y: 160, scale: 0.85 }}
+      animate={{ y: 0, scale: 1 }}
       transition={{
         type: "spring",
         stiffness: 180,
@@ -78,8 +78,8 @@ export default function PodiumCard({ user, place }: PodiumCardProps) {
     >
       {place === 1 ? (
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: -10 }}
+          animate={{ y: 0 }}
           transition={{ delay: config.delay + 0.5, duration: 0.4 }}
         >
           <Crown

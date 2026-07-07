@@ -13,11 +13,20 @@ export default function PageTransition({ children }: { children: ReactNode }) {
 
   return (
     <AnimatePresence mode="wait" initial={false}>
+      {/*
+        No opacity here on purpose. This wrapper re-mounts on every route
+        change and contains the entire page, so it's the highest-stakes
+        place an opacity-driven entrance can hit the Chromium
+        backdrop-filter compositing bug (content renders but never gets
+        painted — visible interactively, invisible visually — until a
+        forced reflow like a resize). A slide is enough of a transition
+        without that risk.
+      */}
       <motion.div
         key={pathname}
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -16 }}
+        initial={{ y: 16 }}
+        animate={{ y: 0 }}
+        exit={{ y: -16 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       >
         {children}

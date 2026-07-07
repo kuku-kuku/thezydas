@@ -48,9 +48,8 @@ export default function KickEmbed({ status }: { status: StreamStatus }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.97 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
+      initial={{ scale: 0.97 }}
+      animate={{ scale: 1 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className="relative"
     >
