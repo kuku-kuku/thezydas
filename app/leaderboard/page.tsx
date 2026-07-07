@@ -23,6 +23,7 @@ export default async function LeaderboardPage() {
         eyebrow="Rain.gg · Code THEZYDAS"
         title="Leaderboard"
         description="Top wagerers this cycle, ranked live. Climb the board, take home real prizes."
+        revealOnScroll={false}
       />
 
       <div className="mt-10 flex justify-center">

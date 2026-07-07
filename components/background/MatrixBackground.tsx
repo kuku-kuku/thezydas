@@ -143,56 +143,63 @@ export default function MatrixBackground() {
 
     function loop(now: number) {
       if (!isVisible) return;
-      const dt = Math.min((now - lastTime) / 1000, 0.05);
-      lastTime = now;
+      // A draw error should never be able to silently kill the rAF chain —
+      // always reschedule the next frame from `finally`, even if something
+      // above throws.
+      try {
+        const dt = Math.min((now - lastTime) / 1000, 0.05);
+        lastTime = now;
 
-      const mouse = mouseRef.current;
-      mouse.x += (mouse.targetX - mouse.x) * 0.04;
-      mouse.y += (mouse.targetY - mouse.y) * 0.04;
+        const mouse = mouseRef.current;
+        mouse.x += (mouse.targetX - mouse.x) * 0.04;
+        mouse.y += (mouse.targetY - mouse.y) * 0.04;
 
-      if (!ctx) return;
-      ctx.clearRect(0, 0, width, height);
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
 
-      // Matrix rain columns
-      ctx.textBaseline = "top";
-      for (const col of columns) {
-        const parallaxX = mouse.x * 6;
-        ctx.font = `${col.fontSize}px ${monoFontFamily}, monospace`;
-        for (let i = 0; i < col.chars.length; i++) {
-          const charY = col.y - i * (col.fontSize + 2);
-          if (charY < -20 || charY > height + 20) continue;
-          const fade = i === 0 ? col.opacity * 2.2 : col.opacity * (1 - i / col.chars.length);
-          ctx.fillStyle = `rgba(0, 255, 136, ${Math.max(0, fade)})`;
-          ctx.fillText(col.chars[i], col.x + parallaxX, charY);
+        // Matrix rain columns
+        ctx.textBaseline = "top";
+        for (const col of columns) {
+          const parallaxX = mouse.x * 6;
+          ctx.font = `${col.fontSize}px ${monoFontFamily}, monospace`;
+          for (let i = 0; i < col.chars.length; i++) {
+            const charY = col.y - i * (col.fontSize + 2);
+            if (charY < -20 || charY > height + 20) continue;
+            const fade = i === 0 ? col.opacity * 2.2 : col.opacity * (1 - i / col.chars.length);
+            ctx.fillStyle = `rgba(0, 255, 136, ${Math.max(0, fade)})`;
+            ctx.fillText(col.chars[i], col.x + parallaxX, charY);
+          }
+          col.y += col.speed * dt;
+          if (Math.random() < 0.02) {
+            col.chars[Math.floor(Math.random() * col.chars.length)] =
+              MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)];
+          }
+          if (col.y - col.chars.length * (col.fontSize + 2) > height) {
+            col.y = Math.random() * -height * 0.5;
+          }
         }
-        col.y += col.speed * dt;
-        if (Math.random() < 0.02) {
-          col.chars[Math.floor(Math.random() * col.chars.length)] =
-            MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)];
+
+        // Floating words
+        for (const word of words) {
+          const parallaxX = mouse.x * 22 * word.depth;
+          const parallaxY = mouse.y * 14 * word.depth;
+          ctx.font = `700 ${word.size}px ${displayFontFamily}, sans-serif`;
+          ctx.fillStyle = `rgba(0, 255, 136, ${word.opacity})`;
+          ctx.fillText(
+            word.text,
+            word.x + parallaxX + Math.sin(now / 4000 + word.x) * word.drift,
+            word.y + parallaxY
+          );
+          word.y -= word.speed * dt;
+          if (word.y < -40) {
+            Object.assign(word, createWord(), { y: height + 40 });
+          }
         }
-        if (col.y - col.chars.length * (col.fontSize + 2) > height) {
-          col.y = Math.random() * -height * 0.5;
-        }
+      } catch {
+        // Swallow draw errors — a bad frame shouldn't stop the animation.
+      } finally {
+        rafId = requestAnimationFrame(loop);
       }
-
-      // Floating words
-      for (const word of words) {
-        const parallaxX = mouse.x * 22 * word.depth;
-        const parallaxY = mouse.y * 14 * word.depth;
-        ctx.font = `700 ${word.size}px ${displayFontFamily}, sans-serif`;
-        ctx.fillStyle = `rgba(0, 255, 136, ${word.opacity})`;
-        ctx.fillText(
-          word.text,
-          word.x + parallaxX + Math.sin(now / 4000 + word.x) * word.drift,
-          word.y + parallaxY
-        );
-        word.y -= word.speed * dt;
-        if (word.y < -40) {
-          Object.assign(word, createWord(), { y: height + 40 });
-        }
-      }
-
-      rafId = requestAnimationFrame(loop);
     }
 
     if (!prefersReducedMotion) {
@@ -209,8 +216,22 @@ export default function MatrixBackground() {
       }
     }
 
+    // Belt-and-suspenders: if the rAF chain ever stalls while the tab is
+    // visible (e.g. a browser hiccup, an rAF callback getting dropped),
+    // self-heal by kicking off a fresh chain instead of staying frozen.
+    const watchdog = !prefersReducedMotion
+      ? window.setInterval(() => {
+          if (isVisible && performance.now() - lastTime > 2000) {
+            cancelAnimationFrame(rafId);
+            lastTime = performance.now();
+            rafId = requestAnimationFrame(loop);
+          }
+        }, 3000)
+      : undefined;
+
     return () => {
       cancelAnimationFrame(rafId);
+      if (watchdog) window.clearInterval(watchdog);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onPointerMove);
       document.removeEventListener("visibilitychange", onVisibilityChange);

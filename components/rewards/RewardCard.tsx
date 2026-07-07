@@ -11,9 +11,8 @@ export default function RewardCard({ reward, index }: { reward: Reward; index: n
 
   return (
     <GlassCard
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
+      initial={{ y: 30 }}
+      animate={{ y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -6 }}
       className="flex flex-col gap-4 p-7"

@@ -18,6 +18,7 @@ export default async function VodsPage() {
         eyebrow="Watch Back"
         title="VOD Gallery"
         description="Every big win, every bonus hunt, every clutch session — replay it all."
+        revealOnScroll={false}
       />
       <div className="mt-14">
         <VodsGrid vods={vods} />

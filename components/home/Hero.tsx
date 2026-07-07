@@ -15,10 +15,13 @@ const container: Variants = {
   },
 };
 
+// No opacity dip here: Framer Motion renders `initial` inline in the SSR'd
+// HTML, so an opacity:0 start means the headline is invisible until JS
+// hydrates. On a slow/cold load that can take a noticeable moment — keep the
+// text fully readable immediately and only animate the blur/position flourish.
 const wordVariant: Variants = {
-  hidden: { opacity: 0, y: 40, filter: "blur(8px)" },
+  hidden: { y: 40, filter: "blur(8px)" },
   show: {
-    opacity: 1,
     y: 0,
     filter: "blur(0px)",
     transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
@@ -29,8 +32,8 @@ export default function Hero() {
   return (
     <section className="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden px-4 pb-20 pt-28 text-center sm:px-6">
       <motion.div
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ y: -12 }}
+        animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
         className="mb-6"
       >
@@ -38,8 +41,8 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.85, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
+        initial={{ scale: 0.85, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         className="relative mb-8"
       >
@@ -74,8 +77,8 @@ export default function Hero() {
       </motion.h1>
 
       <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
         transition={{ duration: 0.6, delay: 0.9 }}
         className="mt-6 max-w-xl text-balance font-mono text-sm text-[var(--color-mist-dim)] sm:text-base"
       >
@@ -85,8 +88,8 @@ export default function Hero() {
       </motion.p>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
         transition={{ duration: 0.6, delay: 1.1 }}
         className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
       >

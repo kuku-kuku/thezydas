@@ -29,6 +29,7 @@ export default async function KickPage() {
         eyebrow="Watch Live"
         title="TheZydas on Kick"
         description="High-stakes wagers, big wins, and live leaderboard chases — every stream."
+        revealOnScroll={false}
       />
 
       <div className="mx-auto mt-12 max-w-4xl">

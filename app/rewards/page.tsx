@@ -21,6 +21,7 @@ export default async function RewardsPage() {
         eyebrow="Affiliate Perks"
         title="Rewards & Bonuses"
         description="Everything you unlock by playing on rain.gg under code THEZYDAS."
+        revealOnScroll={false}
       />
 
       <div className="mt-12 flex flex-col items-center gap-6">
