@@ -305,8 +305,12 @@ const MOCK_STREAM_STATUS: StreamStatus = {
 };
 
 export async function getStreamStatus(): Promise<StreamStatus> {
-  // TODO(real API): replace with a fetch to the Kick public API,
-  //   e.g. `https://kick.com/api/v2/channels/thezydas`, and map `livestream !== null`.
+  // Kick's channel API sits behind Cloudflare bot-detection that blocks most
+  // server-to-server requests (confirmed: works from an ad-hoc script, 403s
+  // consistently through Next's server fetch). The real live/offline check
+  // happens client-side in <KickEmbed> instead, where a genuine browser
+  // request passes Kick's CORS + bot checks. This just seeds a safe initial
+  // value for the first server-rendered paint.
   return delay(MOCK_STREAM_STATUS);
 }
 
