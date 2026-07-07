@@ -51,11 +51,14 @@ export default function MatrixBackground() {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    // Respect the preference with a much gentler drift rather than freezing
-    // entirely — a fully static canvas needs a special-cased code path that
-    // previously diverged from the normal animated one, which is exactly
-    // the kind of split that hides bugs (this one included).
-    const motionScale = prefersReducedMotion ? 0.12 : 1;
+    // Respect the preference by dropping the mouse-parallax whip (the more
+    // likely actual discomfort trigger) rather than freezing the whole
+    // canvas — a fully static/near-static canvas needs a special-cased code
+    // path that previously diverged from the normal animated one, which is
+    // exactly the kind of split that hides bugs (this one included). The
+    // ambient drift itself stays at full speed: it's slow, low-opacity
+    // background flavor, not the kind of motion WCAG 2.3.3 is about.
+    const motionScale = 1;
     const parallaxScale = prefersReducedMotion ? 0 : 1;
 
     let width = window.innerWidth;
