@@ -68,7 +68,6 @@ export default function KickEmbed({ status }: { status: StreamStatus }) {
             title={`${KICK_CHANNEL} Kick stream`}
             loading="lazy"
             allow="autoplay; fullscreen; encrypted-media"
-            allowFullScreen
             className="h-full w-full"
           />
         </div>

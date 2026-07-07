@@ -110,6 +110,13 @@ body {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(0, 255, 136, 0.14);
+    /* Chromium can fail to (re)composite a backdrop-filter layer when a
+       sibling/self transform animation (Framer Motion's entrance reveal)
+       settles to `transform: none` right after mount, leaving the element
+       invisible until something forces a reflow. Keeping a dedicated layer
+       around via will-change avoids the layer promotion/demotion churn
+       that triggers it. */
+    will-change: transform;
   }
 
   .glass-strong {
@@ -117,6 +124,7 @@ body {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(0, 255, 136, 0.2);
+    will-change: transform;
   }
 
   .glow-text {
