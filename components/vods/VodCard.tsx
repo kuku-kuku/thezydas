@@ -25,7 +25,6 @@ export default function VodCard({ vod, index }: VodCardProps) {
 
   return (
     <motion.div
-      layout
       initial={{ y: 30 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, delay: (index % 8) * 0.06, ease: [0.16, 1, 0.3, 1] }}
