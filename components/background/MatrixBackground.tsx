@@ -51,6 +51,12 @@ export default function MatrixBackground() {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    // Respect the preference with a much gentler drift rather than freezing
+    // entirely — a fully static canvas needs a special-cased code path that
+    // previously diverged from the normal animated one, which is exactly
+    // the kind of split that hides bugs (this one included).
+    const motionScale = prefersReducedMotion ? 0.12 : 1;
+    const parallaxScale = prefersReducedMotion ? 0 : 1;
 
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -90,7 +96,7 @@ export default function MatrixBackground() {
         depth,
         size: 12 + depth * 22,
         opacity: 0.04 + depth * 0.08,
-        speed: 6 + depth * 18,
+        speed: (6 + depth * 18) * motionScale,
         drift: (Math.random() - 0.5) * 8,
       };
     }
@@ -102,7 +108,7 @@ export default function MatrixBackground() {
         // On first mount, scatter heads across the full viewport so the rain
         // is already visible immediately instead of falling in from above.
         y: initial ? Math.random() * height : Math.random() * -height,
-        speed: 40 + Math.random() * 70,
+        speed: (40 + Math.random() * 70) * motionScale,
         length,
         fontSize: 13 + Math.random() * 4,
         chars: Array.from(
@@ -160,7 +166,7 @@ export default function MatrixBackground() {
         // Matrix rain columns
         ctx.textBaseline = "top";
         for (const col of columns) {
-          const parallaxX = mouse.x * 6;
+          const parallaxX = mouse.x * 6 * parallaxScale;
           ctx.font = `${col.fontSize}px ${monoFontFamily}, monospace`;
           for (let i = 0; i < col.chars.length; i++) {
             const charY = col.y - i * (col.fontSize + 2);
@@ -181,8 +187,8 @@ export default function MatrixBackground() {
 
         // Floating words
         for (const word of words) {
-          const parallaxX = mouse.x * 22 * word.depth;
-          const parallaxY = mouse.y * 14 * word.depth;
+          const parallaxX = mouse.x * 22 * word.depth * parallaxScale;
+          const parallaxY = mouse.y * 14 * word.depth * parallaxScale;
           ctx.font = `700 ${word.size}px ${displayFontFamily}, sans-serif`;
           ctx.fillStyle = `rgba(0, 255, 136, ${word.opacity})`;
           ctx.fillText(
@@ -202,36 +208,22 @@ export default function MatrixBackground() {
       }
     }
 
-    if (!prefersReducedMotion) {
-      rafId = requestAnimationFrame(loop);
-    } else {
-      // Static single paint for reduced-motion users
-      if (ctx) {
-        ctx.clearRect(0, 0, width, height);
-        ctx.font = `700 18px ${displayFontFamily}, sans-serif`;
-        for (const word of words) {
-          ctx.fillStyle = `rgba(0, 255, 136, ${word.opacity})`;
-          ctx.fillText(word.text, word.x, word.y);
-        }
-      }
-    }
+    rafId = requestAnimationFrame(loop);
 
     // Belt-and-suspenders: if the rAF chain ever stalls while the tab is
     // visible (e.g. a browser hiccup, an rAF callback getting dropped),
     // self-heal by kicking off a fresh chain instead of staying frozen.
-    const watchdog = !prefersReducedMotion
-      ? window.setInterval(() => {
-          if (isVisible && performance.now() - lastTime > 2000) {
-            cancelAnimationFrame(rafId);
-            lastTime = performance.now();
-            rafId = requestAnimationFrame(loop);
-          }
-        }, 3000)
-      : undefined;
+    const watchdog = window.setInterval(() => {
+      if (isVisible && performance.now() - lastTime > 2000) {
+        cancelAnimationFrame(rafId);
+        lastTime = performance.now();
+        rafId = requestAnimationFrame(loop);
+      }
+    }, 3000);
 
     return () => {
       cancelAnimationFrame(rafId);
-      if (watchdog) window.clearInterval(watchdog);
+      window.clearInterval(watchdog);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onPointerMove);
       document.removeEventListener("visibilitychange", onVisibilityChange);
