@@ -58,6 +58,7 @@ export default function MatrixBackground() {
 
     let words: FloatingWord[] = [];
     let columns: RainColumn[] = [];
+    let isFirstResize = true;
 
     function resize() {
       if (!canvas || !ctx) return;
@@ -75,8 +76,9 @@ export default function MatrixBackground() {
 
       const colCount = Math.max(8, Math.round(width / 90));
       columns = Array.from({ length: colCount }, (_, i) =>
-        createColumn(i, colCount)
+        createColumn(i, colCount, isFirstResize)
       );
+      isFirstResize = false;
     }
 
     function createWord(): FloatingWord {
@@ -93,11 +95,13 @@ export default function MatrixBackground() {
       };
     }
 
-    function createColumn(index: number, total: number): RainColumn {
+    function createColumn(index: number, total: number, initial = false): RainColumn {
       const length = 6 + Math.floor(Math.random() * 14);
       return {
         x: (width / total) * index + Math.random() * 20,
-        y: Math.random() * -height,
+        // On first mount, scatter heads across the full viewport so the rain
+        // is already visible immediately instead of falling in from above.
+        y: initial ? Math.random() * height : Math.random() * -height,
         speed: 40 + Math.random() * 70,
         length,
         fontSize: 13 + Math.random() * 4,
