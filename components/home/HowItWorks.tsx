@@ -5,6 +5,7 @@ import { Coins, TrendingUp, Trophy } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
 import { AFFILIATE_CODE } from "@/lib/api";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 
 const STEPS = [
   {
@@ -37,6 +38,8 @@ const item: Variants = {
 };
 
 export default function HowItWorks() {
+  const skipInitial = useSkipInitialAnimation();
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
       <SectionHeading
@@ -47,7 +50,7 @@ export default function HowItWorks() {
 
       <motion.div
         variants={container}
-        initial="hidden"
+        initial={skipInitial ? false : "hidden"}
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
         className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3"

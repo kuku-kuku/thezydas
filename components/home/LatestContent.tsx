@@ -6,6 +6,7 @@ import { ArrowRight, Clapperboard, Play, User, Video } from "lucide-react";
 import type { ReactNode } from "react";
 import GlassCard from "@/components/ui/GlassCard";
 import { cn, formatCompactNumber, formatDate, formatDuration } from "@/lib/utils";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 import type { SiteStats, Vod } from "@/types";
 
 function hashSeed(seed: string): number {
@@ -123,12 +124,13 @@ interface LatestContentProps {
 export default function LatestContent({ vods, stats }: LatestContentProps) {
   const [latestVideo, ...rest] = vods;
   const clips = rest.slice(0, 3);
+  const skipInitial = useSkipInitialAnimation();
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <GlassCard
-          initial={{ opacity: 0, y: 30 }}
+          initial={skipInitial ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -140,7 +142,7 @@ export default function LatestContent({ vods, stats }: LatestContentProps) {
         </GlassCard>
 
         <GlassCard
-          initial={{ opacity: 0, y: 30 }}
+          initial={skipInitial ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -156,7 +158,7 @@ export default function LatestContent({ vods, stats }: LatestContentProps) {
         </GlassCard>
 
         <GlassCard
-          initial={{ opacity: 0, y: 30 }}
+          initial={skipInitial ? false : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}

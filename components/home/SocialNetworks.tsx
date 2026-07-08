@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { AtSign, Camera, Globe, MessageCircle, Music2, MonitorPlay, Zap } from "lucide-react";
 import type { ComponentType } from "react";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 import type { SocialLink } from "@/types";
 
 const ICON_MAP: Record<SocialLink["icon"], ComponentType<{ className?: string }>> = {
@@ -15,6 +16,8 @@ const ICON_MAP: Record<SocialLink["icon"], ComponentType<{ className?: string }>
 };
 
 export default function SocialNetworks({ socials }: { socials: SocialLink[] }) {
+  const skipInitial = useSkipInitialAnimation();
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="flex items-center justify-center gap-4">
@@ -37,7 +40,7 @@ export default function SocialNetworks({ socials }: { socials: SocialLink[] }) {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
+              initial={skipInitial ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.4, delay: i * 0.05 }}

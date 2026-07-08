@@ -6,6 +6,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
 import CountUpNumber from "@/components/ui/CountUpNumber";
 import { cn } from "@/lib/utils";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 import type { LeaderboardUser } from "@/types";
 
 interface PrizeBreakdownProps {
@@ -24,6 +25,7 @@ export default function PrizeBreakdown({ users }: PrizeBreakdownProps) {
   const rest = users.slice(3);
   const restTotal = rest.reduce((sum, u) => sum + u.prize, 0);
   const values = [top3[0]?.prize ?? 0, top3[1]?.prize ?? 0, top3[2]?.prize ?? 0, restTotal];
+  const skipInitial = useSkipInitialAnimation();
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
@@ -37,7 +39,7 @@ export default function PrizeBreakdown({ users }: PrizeBreakdownProps) {
         {TIERS.map((tier, i) => (
           <GlassCard
             key={tier.ranks}
-            initial={{ opacity: 0, y: 30 }}
+            initial={skipInitial ? false : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
@@ -57,7 +59,7 @@ export default function PrizeBreakdown({ users }: PrizeBreakdownProps) {
       </div>
 
       <motion.p
-        initial={{ opacity: 0 }}
+        initial={skipInitial ? false : { opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ delay: 0.4, duration: 0.6 }}

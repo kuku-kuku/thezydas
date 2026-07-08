@@ -4,8 +4,11 @@ import { Mail } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
 import CopyCodeButton from "@/components/rewards/CopyCodeButton";
 import { CONTACT_EMAIL } from "@/lib/api";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 
 export default function ContactSection() {
+  const skipInitial = useSkipInitialAnimation();
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="flex items-center justify-center gap-4">
@@ -20,7 +23,7 @@ export default function ContactSection() {
       </div>
 
       <GlassCard
-        initial={{ opacity: 0, y: 20 }}
+        initial={skipInitial ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         hover={false}

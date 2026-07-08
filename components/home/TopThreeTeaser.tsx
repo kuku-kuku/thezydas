@@ -6,6 +6,7 @@ import GlassCard from "@/components/ui/GlassCard";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlowButton from "@/components/ui/GlowButton";
 import { cn, formatCurrency } from "@/lib/utils";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 import type { LeaderboardUser } from "@/types";
 
 interface TopThreeTeaserProps {
@@ -20,6 +21,7 @@ const RANK_STYLE: Record<number, { ring: "gold" | "silver" | "bronze"; text: str
 
 export default function TopThreeTeaser({ users }: TopThreeTeaserProps) {
   const top3 = users.slice(0, 3);
+  const skipInitial = useSkipInitialAnimation();
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
@@ -35,7 +37,7 @@ export default function TopThreeTeaser({ users }: TopThreeTeaserProps) {
           return (
             <GlassCard
               key={user.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={skipInitial ? false : { opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.5, delay: i * 0.12 }}
