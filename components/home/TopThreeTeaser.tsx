@@ -21,7 +21,7 @@ const RANK_STYLE: Record<number, { ring: "gold" | "silver" | "bronze"; text: str
 
 export default function TopThreeTeaser({ users }: TopThreeTeaserProps) {
   const top3 = users.slice(0, 3);
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation("TopThreeTeaser");
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">

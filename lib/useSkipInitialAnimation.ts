@@ -19,11 +19,26 @@ let appHasHydrated = false;
  * for instance — see `false` and animate in normally, since there's no SSR
  * mismatch to reconcile at that point.
  */
-export function useSkipInitialAnimation() {
+export function useSkipInitialAnimation(debugLabel?: string) {
   const [skip] = useState(() => !appHasHydrated);
 
+  if (debugLabel && typeof window !== "undefined") {
+    console.log(
+      `[anim] ${debugLabel} render — skipInitial=${skip} (appHasHydrated was ${appHasHydrated})`
+    );
+  }
+
   useEffect(() => {
+    if (debugLabel) {
+      console.log(`[anim] ${debugLabel} mounted (effect ran) — skipInitial was ${skip}`);
+    }
     appHasHydrated = true;
+    return () => {
+      if (debugLabel) {
+        console.log(`[anim] ${debugLabel} unmounted (cleanup ran)`);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return skip;

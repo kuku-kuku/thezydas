@@ -9,7 +9,7 @@ const ICONS = { gift: Gift, coins: Coins, sparkles: Sparkles, percent: Percent }
 
 export default function RewardCard({ reward, index }: { reward: Reward; index: number }) {
   const Icon = ICONS[reward.icon];
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation(`RewardCard:${index}`);
 
   return (
     <GlassCard

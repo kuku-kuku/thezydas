@@ -38,7 +38,7 @@ const item: Variants = {
 };
 
 export default function HowItWorks() {
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation("HowItWorks");
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">

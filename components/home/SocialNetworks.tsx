@@ -16,7 +16,7 @@ const ICON_MAP: Record<SocialLink["icon"], ComponentType<{ className?: string }>
 };
 
 export default function SocialNetworks({ socials }: { socials: SocialLink[] }) {
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation("SocialNetworks");
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">

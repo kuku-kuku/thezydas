@@ -5,10 +5,12 @@ import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import GlassCard from "@/components/ui/GlassCard";
 import { cn } from "@/lib/utils";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 import type { FaqItem } from "@/types";
 
 export default function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
   const [openId, setOpenId] = useState<string | null>(faqs[0]?.id ?? null);
+  const skipInitial = useSkipInitialAnimation("FaqAccordion");
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-3">
@@ -18,7 +20,7 @@ export default function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
           <GlassCard
             key={faq.id}
             hover={false}
-            initial={{ opacity: 0, y: 20 }}
+            initial={skipInitial ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.4, delay: i * 0.06 }}

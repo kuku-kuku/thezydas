@@ -30,7 +30,7 @@ const wordVariant: Variants = {
 };
 
 export default function Hero() {
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation("Hero");
 
   return (
     <section className="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden px-4 pb-20 pt-28 text-center sm:px-6">
@@ -66,6 +66,8 @@ export default function Hero() {
         variants={container}
         initial={skipInitial ? false : "hidden"}
         animate="show"
+        onAnimationStart={() => console.log("[anim] Hero headline: animation START")}
+        onAnimationComplete={() => console.log("[anim] Hero headline: animation COMPLETE")}
         className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-5xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-7xl md:text-8xl"
       >
         {HEADLINE_WORDS.map((word, i) => (

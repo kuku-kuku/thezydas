@@ -11,7 +11,7 @@ const POLL_INTERVAL_MS = 30000;
 
 export default function KickEmbed({ status }: { status: StreamStatus }) {
   const [liveStatus, setLiveStatus] = useState(status);
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation("KickEmbed");
 
   useEffect(() => {
     let cancelled = false;

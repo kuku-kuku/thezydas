@@ -124,7 +124,7 @@ interface LatestContentProps {
 export default function LatestContent({ vods, stats }: LatestContentProps) {
   const [latestVideo, ...rest] = vods;
   const clips = rest.slice(0, 3);
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation("LatestContent");
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">

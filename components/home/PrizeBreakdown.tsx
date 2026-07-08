@@ -25,7 +25,7 @@ export default function PrizeBreakdown({ users }: PrizeBreakdownProps) {
   const rest = users.slice(3);
   const restTotal = rest.reduce((sum, u) => sum + u.prize, 0);
   const values = [top3[0]?.prize ?? 0, top3[1]?.prize ?? 0, top3[2]?.prize ?? 0, restTotal];
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation("PrizeBreakdown");
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">

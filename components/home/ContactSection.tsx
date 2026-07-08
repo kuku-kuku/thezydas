@@ -7,7 +7,7 @@ import { CONTACT_EMAIL } from "@/lib/api";
 import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 
 export default function ContactSection() {
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation("ContactSection");
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">

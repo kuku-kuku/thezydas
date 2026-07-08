@@ -5,6 +5,7 @@ import Avatar from "@/components/ui/Avatar";
 import CountUpNumber from "@/components/ui/CountUpNumber";
 import type { LeaderboardUser } from "@/types";
 import { cn, formatCurrency } from "@/lib/utils";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 
 interface LeaderboardRowProps {
   user: LeaderboardUser;
@@ -12,11 +13,13 @@ interface LeaderboardRowProps {
 }
 
 export default function LeaderboardRow({ user, index }: LeaderboardRowProps) {
+  const skipInitial = useSkipInitialAnimation(`LeaderboardRow:${index}`);
+
   return (
     <motion.div
       layout
       layoutId={user.id}
-      initial={{ opacity: 0, x: -24 }}
+      initial={skipInitial ? false : { opacity: 0, x: -24 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.45, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}

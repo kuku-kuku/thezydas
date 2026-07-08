@@ -64,7 +64,7 @@ const PLACE_CONFIG = {
 export default function PodiumCard({ user, place }: PodiumCardProps) {
   const config = PLACE_CONFIG[place];
   const Icon = config.icon;
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation(`PodiumCard:${place}`);
 
   return (
     <motion.div

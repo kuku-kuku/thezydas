@@ -23,7 +23,7 @@ interface VodCardProps {
 
 export default function VodCard({ vod, index }: VodCardProps) {
   const hue = hashSeed(vod.thumbnail) % 360;
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation(`VodCard:${index}`);
 
   return (
     <motion.div

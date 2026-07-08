@@ -27,19 +27,20 @@ export default function SectionHeading({
   className,
   revealOnScroll = true,
 }: SectionHeadingProps) {
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation(`SectionHeading:${title}`);
 
-  // Page-top headings (revealOnScroll=false) skip the opacity dip: Framer
-  // Motion renders `initial` inline in the SSR'd HTML, so an opacity:0 start
-  // means the title is invisible until JS hydrates — very noticeable on a
-  // slow/cold load since it's the first thing on the page. Below-the-fold
-  // headings keep the fade since JS has plenty of time to hydrate before a
-  // user scrolls to them. They also skip their own `initial` on first paint
-  // (skipInitial) to avoid a hydration snap-back-then-replay glitch, since
-  // the SSR'd HTML already renders them at their settled position.
+  // Both branches skip their `initial` on first paint (skipInitial) to avoid
+  // a hydration snap-back-then-replay glitch: Framer Motion renders every
+  // motion element's *settled* state inline in the SSR'd HTML regardless of
+  // whether it's animate- or whileInView-driven, so re-imposing the real
+  // `initial` on the very first client render forces a visible snap back
+  // before the enter transition replays. Skipping it there means the first
+  // paint just shows the already-correct SSR output once; anything mounted
+  // later via client-side navigation has no SSR output to reconcile against,
+  // so it gets the real `initial` and animates in normally.
   const revealProps = revealOnScroll
     ? {
-        initial: { opacity: 0, y: 24 },
+        initial: skipInitial ? false : { opacity: 0, y: 24 },
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, amount: 0.5 },
       }
@@ -48,6 +49,8 @@ export default function SectionHeading({
   return (
     <motion.div
       {...revealProps}
+      onAnimationStart={() => console.log(`[anim] SectionHeading "${title}": START`)}
+      onAnimationComplete={() => console.log(`[anim] SectionHeading "${title}": COMPLETE`)}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
         "flex flex-col gap-3",

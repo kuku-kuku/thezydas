@@ -3,9 +3,12 @@
 import { Calendar } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
 import { cn } from "@/lib/utils";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 import type { ScheduleItem } from "@/types";
 
 export default function ScheduleGrid({ schedule }: { schedule: ScheduleItem[] }) {
+  const skipInitial = useSkipInitialAnimation("ScheduleGrid");
+
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {schedule.map((item, i) => {
@@ -13,7 +16,7 @@ export default function ScheduleGrid({ schedule }: { schedule: ScheduleItem[] })
         return (
           <GlassCard
             key={item.day}
-            initial={{ opacity: 0, y: 24 }}
+            initial={skipInitial ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.5, delay: i * 0.06 }}

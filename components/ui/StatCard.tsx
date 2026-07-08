@@ -23,7 +23,7 @@ export default function StatCard({
   icon,
   index = 0,
 }: StatCardProps) {
-  const skipInitial = useSkipInitialAnimation();
+  const skipInitial = useSkipInitialAnimation(`StatCard:${label}`);
 
   return (
     <GlassCard
