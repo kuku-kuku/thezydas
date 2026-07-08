@@ -41,7 +41,7 @@ export default function VodsGrid({ vods }: { vods: Vod[] }) {
               {isActive ? (
                 <motion.span
                   layoutId="vod-tab-underline"
-                  className="absolute inset-x-3 -bottom-1 h-[2px] rounded-full bg-[var(--color-neon)] shadow-[0_0_10px_rgba(0,255,136,0.8)]"
+                  className="absolute inset-x-3 -bottom-1 h-[2px] rounded-full bg-[var(--color-neon)] shadow-[0_0_10px_rgba(45,224,224,0.8)]"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               ) : null}

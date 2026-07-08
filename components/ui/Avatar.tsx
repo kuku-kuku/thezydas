@@ -12,7 +12,7 @@ const RING_STYLES: Record<string, string> = {
   gold: "ring-2 ring-[var(--color-gold)] shadow-[0_0_24px_rgba(255,215,0,0.45)]",
   silver: "ring-2 ring-[var(--color-silver)] shadow-[0_0_18px_rgba(201,211,214,0.35)]",
   bronze: "ring-2 ring-[var(--color-bronze)] shadow-[0_0_18px_rgba(205,127,50,0.35)]",
-  neon: "ring-2 ring-[var(--color-neon)]/50 shadow-[0_0_14px_rgba(0,255,136,0.25)]",
+  neon: "ring-2 ring-[var(--color-neon)]/50 shadow-[0_0_14px_rgba(45,224,224,0.25)]",
   none: "",
 };
 

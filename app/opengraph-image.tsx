@@ -15,7 +15,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #050505 0%, #0a0f0a 100%)",
+          background: "linear-gradient(135deg, #050505 0%, #070d0e 100%)",
           position: "relative",
         }}
       >
@@ -25,7 +25,7 @@ export default function OpengraphImage() {
             inset: 0,
             display: "flex",
             background:
-              "radial-gradient(circle at 50% 50%, rgba(0,255,136,0.18), transparent 60%)",
+              "radial-gradient(circle at 50% 50%, rgba(45,224,224,0.18), transparent 60%)",
           }}
         />
         <div
@@ -33,7 +33,7 @@ export default function OpengraphImage() {
             display: "flex",
             fontSize: 28,
             letterSpacing: 10,
-            color: "#00ff88",
+            color: "#2de0e0",
             fontWeight: 700,
             marginBottom: 24,
           }}
@@ -49,13 +49,13 @@ export default function OpengraphImage() {
             letterSpacing: 2,
           }}
         >
-          THE<span style={{ color: "#00ff88" }}>ZYDAS</span>
+          THE<span style={{ color: "#2de0e0" }}>ZYDAS</span>
         </div>
         <div
           style={{
             display: "flex",
             fontSize: 34,
-            color: "#a8bdb0",
+            color: "#a3c1c3",
             marginTop: 28,
             fontFamily: "monospace",
           }}

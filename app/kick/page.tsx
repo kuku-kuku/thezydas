@@ -46,7 +46,7 @@ export default async function KickPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="glass flex h-11 w-11 items-center justify-center rounded-full text-[var(--color-mist)] transition-all hover:-translate-y-0.5 hover:text-[var(--color-neon)] hover:shadow-[0_0_16px_rgba(0,255,136,0.3)]"
+                className="glass flex h-11 w-11 items-center justify-center rounded-full text-[var(--color-mist)] transition-all hover:-translate-y-0.5 hover:text-[var(--color-neon)] hover:shadow-[0_0_16px_rgba(45,224,224,0.3)]"
               >
                 <social.icon className="h-5 w-5" />
               </a>

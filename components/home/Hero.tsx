@@ -50,7 +50,7 @@ export default function Hero() {
         className="relative mb-8"
       >
         <div className="pointer-events-none absolute -inset-5 -z-10 animate-pulse-slow rounded-full bg-[var(--color-neon)]/20 blur-2xl" />
-        <div className="animate-float overflow-hidden rounded-full ring-2 ring-[var(--color-neon)]/60 shadow-[0_0_50px_rgba(0,255,136,0.4)]">
+        <div className="animate-float overflow-hidden rounded-full ring-2 ring-[var(--color-neon)]/60 shadow-[0_0_50px_rgba(45,224,224,0.4)]">
           <Image
             src="/theyzdas.webp"
             alt="TheZydas"
@@ -109,7 +109,7 @@ export default function Hero() {
         initial={skipInitial ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.4, delay: 0.4 }}
-        className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 h-[500px] -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(0,255,136,0.14),transparent_65%)]"
+        className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 h-[500px] -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(45,224,224,0.14),transparent_65%)]"
       />
     </section>
   );

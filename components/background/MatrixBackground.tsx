@@ -175,7 +175,7 @@ export default function MatrixBackground() {
             const charY = col.y - i * (col.fontSize + 2);
             if (charY < -20 || charY > height + 20) continue;
             const fade = i === 0 ? col.opacity * 2.2 : col.opacity * (1 - i / col.chars.length);
-            ctx.fillStyle = `rgba(0, 255, 136, ${Math.max(0, fade)})`;
+            ctx.fillStyle = `rgba(45, 224, 224, ${Math.max(0, fade)})`;
             ctx.fillText(col.chars[i], col.x + parallaxX, charY);
           }
           col.y += col.speed * dt;
@@ -193,7 +193,7 @@ export default function MatrixBackground() {
           const parallaxX = mouse.x * 22 * word.depth * parallaxScale;
           const parallaxY = mouse.y * 14 * word.depth * parallaxScale;
           ctx.font = `700 ${word.size}px ${displayFontFamily}, sans-serif`;
-          ctx.fillStyle = `rgba(0, 255, 136, ${word.opacity})`;
+          ctx.fillStyle = `rgba(45, 224, 224, ${word.opacity})`;
           ctx.fillText(
             word.text,
             word.x + parallaxX + Math.sin(now / 4000 + word.x) * word.drift,

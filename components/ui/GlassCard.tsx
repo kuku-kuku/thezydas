@@ -21,7 +21,7 @@ export default function GlassCard({
         "rounded-2xl",
         strong ? "glass-strong" : "glass",
         hover &&
-          "transition-shadow duration-300 hover:shadow-[0_0_36px_rgba(0,255,136,0.18)]",
+          "transition-shadow duration-300 hover:shadow-[0_0_36px_rgba(45,224,224,0.18)]",
         className
       )}
       {...props}

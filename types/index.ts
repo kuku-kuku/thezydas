@@ -23,6 +23,7 @@ export interface Vod {
   durationSeconds: number;
   category: VodCategory;
   url: string;
+  views: number;
 }
 
 export interface ScheduleItem {
@@ -49,5 +50,5 @@ export interface SocialLink {
   id: string;
   label: string;
   href: string;
-  icon: "kick" | "twitter" | "discord" | "instagram" | "youtube";
+  icon: "kick" | "twitter" | "discord" | "instagram" | "youtube" | "tiktok";
 }

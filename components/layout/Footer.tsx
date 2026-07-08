@@ -44,7 +44,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="glass flex h-10 w-10 items-center justify-center rounded-full text-[var(--color-mist)] transition-all hover:-translate-y-0.5 hover:text-[var(--color-neon)] hover:shadow-[0_0_16px_rgba(0,255,136,0.3)]"
+                  className="glass flex h-10 w-10 items-center justify-center rounded-full text-[var(--color-mist)] transition-all hover:-translate-y-0.5 hover:text-[var(--color-neon)] hover:shadow-[0_0_16px_rgba(45,224,224,0.3)]"
                 >
                   <social.icon className="h-4 w-4" />
                 </a>

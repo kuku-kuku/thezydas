@@ -22,7 +22,7 @@ export default function LeaderboardRow({ user, index }: LeaderboardRowProps) {
       transition={{ duration: 0.45, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -3 }}
       className={cn(
-        "grid grid-cols-[3rem_1fr_auto_auto] items-center gap-3 rounded-xl px-4 py-3 transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(0,255,136,0.15)] sm:grid-cols-[3.5rem_1fr_auto_auto] sm:gap-4 sm:px-5",
+        "grid grid-cols-[3rem_1fr_auto_auto] items-center gap-3 rounded-xl px-4 py-3 transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(45,224,224,0.15)] sm:grid-cols-[3.5rem_1fr_auto_auto] sm:gap-4 sm:px-5",
         index % 2 === 0 ? "bg-white/[0.02]" : "bg-transparent",
         "border border-transparent hover:border-[var(--color-neon)]/20"
       )}

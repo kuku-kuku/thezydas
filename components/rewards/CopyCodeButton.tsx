@@ -5,7 +5,17 @@ import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-export default function CopyCodeButton({ code }: { code: string }) {
+interface CopyCodeButtonProps {
+  code: string;
+  label?: string;
+  valueClassName?: string;
+}
+
+export default function CopyCodeButton({
+  code,
+  label = "Affiliate Code",
+  valueClassName,
+}: CopyCodeButtonProps) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
@@ -31,9 +41,14 @@ export default function CopyCodeButton({ code }: { code: string }) {
     >
       <div className="flex flex-col items-start text-left">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--color-mist-dim)]">
-          Affiliate Code
+          {label}
         </span>
-        <span className="font-display text-2xl font-black tracking-widest text-white sm:text-3xl">
+        <span
+          className={cn(
+            "font-display text-2xl font-black tracking-widest text-white sm:text-3xl",
+            valueClassName
+          )}
+        >
           {code}
         </span>
       </div>
@@ -70,7 +85,7 @@ export default function CopyCodeButton({ code }: { code: string }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(0,255,136,0.25),transparent_70%)]"
+            className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(45,224,224,0.25),transparent_70%)]"
           />
         ) : null}
       </AnimatePresence>

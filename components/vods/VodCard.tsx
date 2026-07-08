@@ -44,7 +44,7 @@ export default function VodCard({ vod, index }: VodCardProps) {
               className="absolute inset-0 opacity-30 mix-blend-screen transition-transform duration-500 group-hover:scale-110"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(45deg, rgba(0,255,136,0.15) 0px, rgba(0,255,136,0.15) 2px, transparent 2px, transparent 10px)",
+                  "repeating-linear-gradient(45deg, rgba(45,224,224,0.15) 0px, rgba(45,224,224,0.15) 2px, transparent 2px, transparent 10px)",
               }}
             />
             <div className="absolute inset-0 flex items-center justify-center">
@@ -65,7 +65,7 @@ export default function VodCard({ vod, index }: VodCardProps) {
           </div>
           <div
             className={cn(
-              "flex flex-col gap-1 p-4 transition-shadow duration-300 group-hover:shadow-[0_0_24px_rgba(0,255,136,0.12)]"
+              "flex flex-col gap-1 p-4 transition-shadow duration-300 group-hover:shadow-[0_0_24px_rgba(45,224,224,0.12)]"
             )}
           >
             <h3 className="line-clamp-2 font-display text-sm font-bold text-white sm:text-base">

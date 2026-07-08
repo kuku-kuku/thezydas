@@ -45,9 +45,9 @@ export default function GlowButton({
 
   const variants: Record<string, string> = {
     primary:
-      "bg-gradient-to-r from-[var(--color-neon-dark)] to-[var(--color-neon-bright)] text-[#031a0f] shadow-[0_0_25px_rgba(0,255,136,0.35)] hover:shadow-[0_0_45px_rgba(0,255,136,0.6)]",
+      "bg-gradient-to-r from-[var(--color-neon-dark)] to-[var(--color-neon-bright)] text-[#031616] shadow-[0_0_25px_rgba(45,224,224,0.35)] hover:shadow-[0_0_45px_rgba(45,224,224,0.6)]",
     outline:
-      "border border-[var(--color-neon)]/40 text-[var(--color-neon)] hover:border-[var(--color-neon)] hover:bg-[var(--color-neon)]/10 hover:shadow-[0_0_30px_rgba(0,255,136,0.25)]",
+      "border border-[var(--color-neon)]/40 text-[var(--color-neon)] hover:border-[var(--color-neon)] hover:bg-[var(--color-neon)]/10 hover:shadow-[0_0_30px_rgba(45,224,224,0.25)]",
     ghost: "text-[var(--color-mist)] hover:text-[var(--color-neon)]",
   };
 

@@ -89,6 +89,7 @@ const MOCK_VODS: Vod[] = [
     durationSeconds: 5423,
     category: "Big Wins",
     url: "https://kick.com/thezydas",
+    views: 12400,
   },
   {
     id: "vod-2",
@@ -98,6 +99,7 @@ const MOCK_VODS: Vod[] = [
     durationSeconds: 7210,
     category: "Live Casino",
     url: "https://kick.com/thezydas",
+    views: 4560,
   },
   {
     id: "vod-3",
@@ -107,6 +109,7 @@ const MOCK_VODS: Vod[] = [
     durationSeconds: 4890,
     category: "Slots",
     url: "https://kick.com/thezydas",
+    views: 3120,
   },
   {
     id: "vod-4",
@@ -116,6 +119,7 @@ const MOCK_VODS: Vod[] = [
     durationSeconds: 1260,
     category: "Highlights",
     url: "https://kick.com/thezydas",
+    views: 1780,
   },
   {
     id: "vod-5",
@@ -125,6 +129,7 @@ const MOCK_VODS: Vod[] = [
     durationSeconds: 6120,
     category: "Live Casino",
     url: "https://kick.com/thezydas",
+    views: 2940,
   },
   {
     id: "vod-6",
@@ -134,6 +139,7 @@ const MOCK_VODS: Vod[] = [
     durationSeconds: 3980,
     category: "Slots",
     url: "https://kick.com/thezydas",
+    views: 2105,
   },
   {
     id: "vod-7",
@@ -143,6 +149,7 @@ const MOCK_VODS: Vod[] = [
     durationSeconds: 9840,
     category: "Big Wins",
     url: "https://kick.com/thezydas",
+    views: 5330,
   },
   {
     id: "vod-8",
@@ -152,6 +159,7 @@ const MOCK_VODS: Vod[] = [
     durationSeconds: 980,
     category: "Highlights",
     url: "https://kick.com/thezydas",
+    views: 1290,
   },
 ];
 
@@ -234,12 +242,17 @@ const MOCK_FAQS: FaqItem[] = [
 ];
 
 const MOCK_SOCIALS: SocialLink[] = [
-  { id: "kick", label: "Kick", href: "https://kick.com/thezydas", icon: "kick" },
   {
-    id: "twitter",
-    label: "Twitter / X",
-    href: "https://twitter.com/thezydas",
-    icon: "twitter",
+    id: "instagram",
+    label: "Instagram",
+    href: "https://instagram.com/thezydas",
+    icon: "instagram",
+  },
+  {
+    id: "tiktok",
+    label: "TikTok",
+    href: "https://tiktok.com/@thezydas",
+    icon: "tiktok",
   },
   {
     id: "discord",
@@ -248,11 +261,12 @@ const MOCK_SOCIALS: SocialLink[] = [
     icon: "discord",
   },
   {
-    id: "instagram",
-    label: "Instagram",
-    href: "https://instagram.com/thezydas",
-    icon: "instagram",
+    id: "youtube",
+    label: "YouTube",
+    href: "https://youtube.com/@thezydas",
+    icon: "youtube",
   },
+  { id: "kick", label: "Kick", href: "https://kick.com/thezydas", icon: "kick" },
 ];
 
 const NETWORK_DELAY_MS = 120;
@@ -324,3 +338,4 @@ export const AFFILIATE_CODE = "THEZYDAS";
 export const RAIN_GG_SIGNUP_URL = "https://rain.gg/r/thezydas";
 export const KICK_CHANNEL = "thezydas";
 export const KICK_URL = `https://kick.com/${KICK_CHANNEL}`;
+export const CONTACT_EMAIL = "business@thezydas.com";

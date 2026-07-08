@@ -3,20 +3,20 @@
 @theme inline {
   /* Base surfaces */
   --color-void: #050505;
-  --color-void-deep: #0a0f0a;
-  --color-surface: #0d1410;
-  --color-surface-raised: #101a14;
+  --color-void-deep: #070d0e;
+  --color-surface: #0b1414;
+  --color-surface-raised: #0e1a1b;
 
-  /* Neon green accents */
-  --color-neon: #00ff88;
-  --color-neon-bright: #0aff6e;
-  --color-neon-dark: #00c853;
-  --color-neon-dim: #00c853;
+  /* Neon cyan accents */
+  --color-neon: #2de0e0;
+  --color-neon-bright: #6df3f3;
+  --color-neon-dark: #0aa3a3;
+  --color-neon-dim: #0aa3a3;
 
-  /* Muted gray-green text */
-  --color-mist: #a8bdb0;
-  --color-mist-dim: #6f8577;
-  --color-mist-faint: #495750;
+  /* Muted cool gray-cyan text */
+  --color-mist: #a3c1c3;
+  --color-mist-dim: #6c8b8e;
+  --color-mist-faint: #435c5e;
 
   /* Rank metals — reserved for top 3 only */
   --color-gold: #ffd700;
@@ -68,10 +68,10 @@
 @keyframes glow-pulse {
   0%,
   100% {
-    box-shadow: 0 0 20px 0 rgba(0, 255, 136, 0.25);
+    box-shadow: 0 0 20px 0 rgba(45, 224, 224, 0.25);
   }
   50% {
-    box-shadow: 0 0 36px 4px rgba(0, 255, 136, 0.4);
+    box-shadow: 0 0 36px 4px rgba(45, 224, 224, 0.4);
   }
 }
 
@@ -86,8 +86,8 @@ body {
 }
 
 ::selection {
-  background: rgba(0, 255, 136, 0.25);
-  color: #eafff2;
+  background: rgba(45, 224, 224, 0.25);
+  color: #eafefe;
 }
 
 /* Scrollbar */
@@ -106,10 +106,10 @@ body {
 /* Reusable utility classes */
 @layer components {
   .glass {
-    background: rgba(10, 20, 15, 0.55);
+    background: rgba(8, 18, 19, 0.55);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 255, 136, 0.14);
+    border: 1px solid rgba(45, 224, 224, 0.14);
     /* Chromium can fail to (re)composite a backdrop-filter layer when a
        sibling/self transform animation (Framer Motion's entrance reveal)
        settles to `transform: none` right after mount, leaving the element
@@ -120,28 +120,28 @@ body {
   }
 
   .glass-strong {
-    background: rgba(10, 20, 15, 0.75);
+    background: rgba(8, 18, 19, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 255, 136, 0.2);
+    border: 1px solid rgba(45, 224, 224, 0.2);
     will-change: transform;
   }
 
   .glow-text {
     text-shadow:
-      0 0 10px rgba(0, 255, 136, 0.6),
-      0 0 30px rgba(0, 255, 136, 0.35),
-      0 0 60px rgba(0, 255, 136, 0.15);
+      0 0 10px rgba(45, 224, 224, 0.6),
+      0 0 30px rgba(45, 224, 224, 0.35),
+      0 0 60px rgba(45, 224, 224, 0.15);
   }
 
   .glow-border {
     box-shadow:
-      0 0 0 1px rgba(0, 255, 136, 0.16),
-      0 0 24px 0 rgba(0, 255, 136, 0.12);
+      0 0 0 1px rgba(45, 224, 224, 0.16),
+      0 0 24px 0 rgba(45, 224, 224, 0.12);
   }
 
   .gradient-text-neon {
-    background: linear-gradient(120deg, #0aff6e 0%, #00ff88 40%, #00c853 100%);
+    background: linear-gradient(120deg, #6df3f3 0%, #2de0e0 40%, #0aa3a3 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -166,7 +166,7 @@ body {
 
   .bg-noise {
     background-image: radial-gradient(
-      rgba(0, 255, 136, 0.06) 1px,
+      rgba(45, 224, 224, 0.06) 1px,
       transparent 1px
     );
     background-size: 3px 3px;
