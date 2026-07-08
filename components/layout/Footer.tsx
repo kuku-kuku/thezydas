@@ -61,6 +61,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    prefetch={false}
                     className="text-sm text-[var(--color-mist-dim)] transition-colors hover:text-[var(--color-neon)]"
                   >
                     {link.label}

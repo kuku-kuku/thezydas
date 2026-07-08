@@ -25,7 +25,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full">
       <div className="glass-strong border-b border-[var(--color-neon)]/10">
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
+          <Link href="/" prefetch={false} className="flex items-center gap-2" onClick={() => setOpen(false)}>
             <Zap className="h-5 w-5 text-[var(--color-neon)]" strokeWidth={2.5} />
             <span className="font-display text-lg font-bold tracking-widest text-white">
               THE<span className="gradient-text-neon">ZYDAS</span>
@@ -40,6 +40,7 @@ export default function Navbar() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
+                    prefetch={false}
                     className={cn(
                       "relative px-4 py-2 font-mono text-xs font-semibold uppercase tracking-widest transition-colors",
                       active ? "text-[var(--color-neon)]" : "text-[var(--color-mist)] hover:text-white"
@@ -93,6 +94,7 @@ export default function Navbar() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
+                      prefetch={false}
                       onClick={() => setOpen(false)}
                       className={cn(
                         "block rounded-lg px-3 py-2.5 font-mono text-sm font-semibold uppercase tracking-widest",

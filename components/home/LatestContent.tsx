@@ -38,6 +38,7 @@ function ColumnHeader({
       {href ? (
         <Link
           href={href}
+          prefetch={false}
           className="flex items-center gap-1 font-mono text-[10px] font-semibold uppercase tracking-widest text-[var(--color-mist-dim)] transition-colors hover:text-[var(--color-neon)]"
         >
           View All <ArrowRight className="h-3 w-3" />
