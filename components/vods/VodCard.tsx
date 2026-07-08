@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
 import { cn, formatDate, formatDuration } from "@/lib/utils";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 import type { Vod } from "@/types";
 
 function hashSeed(seed: string): number {
@@ -22,10 +23,11 @@ interface VodCardProps {
 
 export default function VodCard({ vod, index }: VodCardProps) {
   const hue = hashSeed(vod.thumbnail) % 360;
+  const skipInitial = useSkipInitialAnimation();
 
   return (
     <motion.div
-      initial={{ y: 30 }}
+      initial={skipInitial ? false : { y: 30 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, delay: (index % 8) * 0.06, ease: [0.16, 1, 0.3, 1] }}
       exit={{ opacity: 0, y: -10 }}

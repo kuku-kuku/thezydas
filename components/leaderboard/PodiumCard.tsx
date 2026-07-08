@@ -6,6 +6,7 @@ import Avatar from "@/components/ui/Avatar";
 import CountUpNumber from "@/components/ui/CountUpNumber";
 import type { LeaderboardUser } from "@/types";
 import { cn, formatCurrency } from "@/lib/utils";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 
 interface PodiumCardProps {
   user: LeaderboardUser;
@@ -63,10 +64,11 @@ const PLACE_CONFIG = {
 export default function PodiumCard({ user, place }: PodiumCardProps) {
   const config = PLACE_CONFIG[place];
   const Icon = config.icon;
+  const skipInitial = useSkipInitialAnimation();
 
   return (
     <motion.div
-      initial={{ y: 160, scale: 0.85 }}
+      initial={skipInitial ? false : { y: 160, scale: 0.85 }}
       animate={{ y: 0, scale: 1 }}
       transition={{
         type: "spring",
@@ -78,7 +80,7 @@ export default function PodiumCard({ user, place }: PodiumCardProps) {
     >
       {place === 1 ? (
         <motion.div
-          initial={{ y: -10 }}
+          initial={skipInitial ? false : { y: -10 }}
           animate={{ y: 0 }}
           transition={{ delay: config.delay + 0.5, duration: 0.4 }}
         >

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Badge from "@/components/ui/Badge";
 import GlowButton from "@/components/ui/GlowButton";
 import { AFFILIATE_CODE, RAIN_GG_SIGNUP_URL } from "@/lib/api";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 
 const HEADLINE_WORDS = ["WAGER.", "CLIMB.", "WIN."];
 
@@ -29,10 +30,12 @@ const wordVariant: Variants = {
 };
 
 export default function Hero() {
+  const skipInitial = useSkipInitialAnimation();
+
   return (
     <section className="relative flex min-h-[88vh] flex-col items-center justify-center overflow-hidden px-4 pb-20 pt-28 text-center sm:px-6">
       <motion.div
-        initial={{ y: -12 }}
+        initial={skipInitial ? false : { y: -12 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
         className="mb-6"
@@ -41,7 +44,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        initial={{ scale: 0.85, y: 20 }}
+        initial={skipInitial ? false : { scale: 0.85, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         className="relative mb-8"
@@ -61,7 +64,7 @@ export default function Hero() {
 
       <motion.h1
         variants={container}
-        initial="hidden"
+        initial={skipInitial ? false : "hidden"}
         animate="show"
         className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-display text-5xl font-black uppercase leading-[0.95] tracking-tight text-white sm:text-7xl md:text-8xl"
       >
@@ -77,7 +80,7 @@ export default function Hero() {
       </motion.h1>
 
       <motion.p
-        initial={{ y: 20 }}
+        initial={skipInitial ? false : { y: 20 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, delay: 0.9 }}
         className="mt-6 max-w-xl text-balance font-mono text-sm text-[var(--color-mist-dim)] sm:text-base"
@@ -88,7 +91,7 @@ export default function Hero() {
       </motion.p>
 
       <motion.div
-        initial={{ y: 20 }}
+        initial={skipInitial ? false : { y: 20 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, delay: 1.1 }}
         className="mt-10 flex flex-col items-center gap-4 sm:flex-row"
@@ -103,7 +106,7 @@ export default function Hero() {
 
       <motion.div
         aria-hidden="true"
-        initial={{ opacity: 0 }}
+        initial={skipInitial ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.4, delay: 0.4 }}
         className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 h-[500px] -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(0,255,136,0.14),transparent_65%)]"

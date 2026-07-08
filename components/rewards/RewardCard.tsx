@@ -2,16 +2,18 @@
 
 import { Gift, Coins, Sparkles, Percent } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 import type { Reward } from "@/types";
 
 const ICONS = { gift: Gift, coins: Coins, sparkles: Sparkles, percent: Percent };
 
 export default function RewardCard({ reward, index }: { reward: Reward; index: number }) {
   const Icon = ICONS[reward.icon];
+  const skipInitial = useSkipInitialAnimation();
 
   return (
     <GlassCard
-      initial={{ y: 30 }}
+      initial={skipInitial ? false : { y: 30 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -6 }}

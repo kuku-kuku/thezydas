@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 
 interface SectionHeadingProps {
   eyebrow?: string;
@@ -26,19 +27,23 @@ export default function SectionHeading({
   className,
   revealOnScroll = true,
 }: SectionHeadingProps) {
+  const skipInitial = useSkipInitialAnimation();
+
   // Page-top headings (revealOnScroll=false) skip the opacity dip: Framer
   // Motion renders `initial` inline in the SSR'd HTML, so an opacity:0 start
   // means the title is invisible until JS hydrates — very noticeable on a
   // slow/cold load since it's the first thing on the page. Below-the-fold
   // headings keep the fade since JS has plenty of time to hydrate before a
-  // user scrolls to them.
+  // user scrolls to them. They also skip their own `initial` on first paint
+  // (skipInitial) to avoid a hydration snap-back-then-replay glitch, since
+  // the SSR'd HTML already renders them at their settled position.
   const revealProps = revealOnScroll
     ? {
         initial: { opacity: 0, y: 24 },
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, amount: 0.5 },
       }
-    : { initial: { y: 24 }, animate: { y: 0 } };
+    : { initial: skipInitial ? false : { y: 24 }, animate: { y: 0 } };
 
   return (
     <motion.div

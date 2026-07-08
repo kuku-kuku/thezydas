@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import Badge from "@/components/ui/Badge";
 import { KICK_CHANNEL } from "@/lib/api";
 import type { StreamStatus } from "@/lib/api";
+import { useSkipInitialAnimation } from "@/lib/useSkipInitialAnimation";
 
 const POLL_INTERVAL_MS = 30000;
 
 export default function KickEmbed({ status }: { status: StreamStatus }) {
   const [liveStatus, setLiveStatus] = useState(status);
+  const skipInitial = useSkipInitialAnimation();
 
   useEffect(() => {
     let cancelled = false;
@@ -48,7 +50,7 @@ export default function KickEmbed({ status }: { status: StreamStatus }) {
 
   return (
     <motion.div
-      initial={{ scale: 0.97 }}
+      initial={skipInitial ? false : { scale: 0.97 }}
       animate={{ scale: 1 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className="relative"
